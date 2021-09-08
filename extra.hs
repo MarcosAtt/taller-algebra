@@ -17,3 +17,6 @@ sucA n = sucA (n `mod` 6)
 
 sumSucA 0 = 1
 sumSucA x = sucA (x) + sumSucA (x-1)
+
+ej13 :: Int -> Bool
+ej13 n = ((n^2) + 1) < 2^n
