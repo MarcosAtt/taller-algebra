@@ -1,8 +1,8 @@
 module Clase03 where
 
---import Clase01(digitoN)
-
-factorial 0 = 1
+--import Clase01(digitoN)s
+factorial :: Int -> Int
+factorial 1 = 1
 factorial x = factorial (x - 1) * x
 
 xor :: Bool -> Bool -> Bool
