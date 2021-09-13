@@ -1,3 +1,4 @@
+module Clase02 where
 import ModuloVectores
 identidad :: t -> t
 identidad x = x

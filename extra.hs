@@ -1,3 +1,4 @@
+import Clase02(factorial)
 funA t = ((3-4*t),(2-3*t))
 
 funB t = ((1-(t^2)),(t-2))
@@ -20,3 +21,6 @@ sumSucA x = sucA (x) + sumSucA (x-1)
 
 ej13 :: Int -> Bool
 ej13 n = ((n^2) + 1) < 2^n
+-- Calcula el combinatorio. Funciona para numero chicos.
+numeroCombinatorio :: (Int, Int) -> Int
+numeroCombinatorio (n,k) = factorial(n) `div` (factorial(k)*factorial(n-k))
