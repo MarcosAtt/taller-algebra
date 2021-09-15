@@ -14,7 +14,7 @@ sumaDivisoresHasta :: Int -> Int -> Int
 sumaDivisoresHasta n k | k == 1 = 1
                        | n `mod` k == 0 = k + sumaDivisoresHasta n (k-1)
                        | otherwise      = sumaDivisoresHasta n (k-1)
-
+-- Calcula el menor divisor mayor que 1.
 menorDivisor :: Int -> Int
 menorDivisor n = menorDivisorDesde n 2
 
@@ -152,3 +152,73 @@ collatzMax :: Int -> Int -> Int
 collatzMax n1 n2 | n1 == n2 = n1
                  | largoSecuencia n1 < largoSecuencia n2 = collatzMax (n1+1) n2
                  | otherwise = collatzMax n1 (n2-1)
+-- Esta funcion no la pedian.
+minimoComunMultiplo :: Int -> Int -> Int
+minimoComunMultiplo a b = (a * b) `div` (maximoComunDivisor a b)
+
+maximoComunDivisor :: Int -> Int -> Int
+maximoComunDivisor a b | a > b = divideAmbos a b a
+                       | b > a = divideAmbos a b b
+                       | a == b = a
+
+divideAmbos :: Int -> Int -> Int -> Int
+divideAmbos a b i | i < 0 = 1
+                  | (esDivisor i a) && (esDivisor i b) = i
+                  | otherwise = divideAmbos a b (i-1)
+
+sonCoprimos :: Int -> Int -> Bool
+sonCoprimos a b = maximoComunDivisor a b == 1
+
+cantidadCoprimosMenores :: Int -> Int
+cantidadCoprimosMenores n = cantidadCoprimosMenoresDesde n 2
+
+cantidadCoprimosMenoresDesde :: Int -> Int -> Int
+cantidadCoprimosMenoresDesde n k | n == k = 0
+                                 | sonCoprimos n k = 1 + cantidadCoprimosMenoresDesde n (k+1)
+                                 | otherwise = cantidadCoprimosMenoresDesde n (k+1)
+
+satisfaceGoldbach :: Int -> Bool
+satisfaceGoldbach n = esPar n && (n > 2) && existenDosPrimosDesdeA 1 n n
+
+existenDosPrimosDesdeA :: Int -> Int -> Int -> Bool
+existenDosPrimosDesdeA a b n | not (existenDosPrimosDesde a b n) = existenDosPrimosDesdeA (a+1) b n
+                             | a > b = False
+                             | otherwise = True
+
+existenDosPrimosDesde :: Int -> Int -> Int -> Bool
+existenDosPrimosDesde a b n | b < a = False
+                            | nEsimoPrimo a + nEsimoPrimo b == n = True
+                            | otherwise = existenDosPrimosDesde a (b-1) n
+
+{- Estas funciones ya estan incluidas en Haskell
+min :: Int -> Int -> Int
+min a b | a < b = a
+        | otherwise = b
+
+max :: Int -> Int -> Int
+max a b | a > b = a
+        | otherwise = b
+-}
+
+-- Version de Tobi, mas pro
+
+esDivisor :: Int -> Int -> Bool
+esDivisor k a = a `mod` k == 0
+
+existeDivisorComunHasta :: Int -> Int -> Int -> Bool
+existeDivisorComunHasta _ _ 1 = False
+existeDivisorComunHasta a b hasta = (esDivisor hasta a) && (esDivisor hasta b) || existeDivisorComunHasta a b (hasta-1)
+
+sonCoprimos' :: Int -> Int -> Bool
+sonCoprimos' a b = not (existeDivisorComunHasta a b (min a b))
+
+-- Refactorizacion de lo mio con booleanos como hizo tobi. La idea era exactamente la misma pero usaba un entero sin necesidad.
+
+divideAmbos2 :: Int -> Int -> Int -> Bool
+divideAmbos2 _ _ 1 = False
+divideAmbos2 a b i = (esDivisor i a) && (esDivisor i b) || divideAmbos2 a b (i-1)
+
+sonCoprimos2 :: Int -> Int -> Bool
+sonCoprimos2 a b = not (divideAmbos2 a b (min a b))
+
+--sonCoprimosHasta' :: Int -> Int -> Int -> Bool
