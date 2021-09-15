@@ -1,3 +1,4 @@
+module Clase05 where
 import Clase03(factorial, fib, esPar)
 {- Clase 05: Recursion con funciones auxiliares. -}
 

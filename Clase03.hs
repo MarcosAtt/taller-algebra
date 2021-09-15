@@ -1,6 +1,5 @@
 module Clase03 where
 
---import Clase01(digitoN)s
 factorial :: Int -> Int
 factorial 1 = 1
 factorial x = factorial (x - 1) * x
