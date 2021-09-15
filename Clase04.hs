@@ -67,13 +67,13 @@ g3 0 = 0
 g3 n | esPar n = 2^n + g3 (n-2)
      | otherwise = g3 (n-1)
 -- Suma todos los naturales <= n con digitos iguales.
+{-
 7
 Implementar una función que dado un n, sume todos los números naturales menores o
-iguales que n que tengan todos los dı́gitos iguales.
+iguales que n que tengan todos los dı́gitos iguales.-}
 sumaDigitosIguales :: Int -> Int
 sumaDigitosIguales | n == 0 = 0
                    | n < 10 = n + sumaDigitosIguales (n-1)
-                   | 
 
 -- 1 Cumple propiedad de gauss.
 
