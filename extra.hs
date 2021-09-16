@@ -24,3 +24,14 @@ ej13 n = ((n^2) + 1) < 2^n
 -- Calcula el combinatorio. Funciona para numero chicos.
 numeroCombinatorio :: (Int, Int) -> Int
 numeroCombinatorio (n,k) = factorial(n) `div` (factorial(k)*factorial(n-k))
+
+get1 (a,_,_,_,_) = a
+get2 (_,a,_,_,_) = a
+get3 (_,_,a,_,_) = a
+get4 (_,_,_,a,_) = a
+get5 (_,_,_,_,a) = a
+
+testFuncionBool' :: (Integer -> Bool) -> Integer -> Bool -> ((Integer -> Bool), Integer, Bool, Bool, Bool)
+testFuncionBool' funcion valorEntrada provisto = (funcion, valorEntrada, cuantoDa, provisto, paso)
+                            where cuantoDa = funcion valorEntrada
+                                  paso = cuantoDa == provisto
