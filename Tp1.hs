@@ -1,15 +1,5 @@
 module Tp1 where
 
--- Funciones de Testeo: toman una funcion la evaluan al segundo argumento y la comparan con el tercero. Si la prueba fue exitosa devuelven True.
-testFuncionBool :: (Integer -> Bool) -> Integer -> Bool -> Bool
-testFuncionBool funcion x c = funcion x == c
-
-testFuncionInteger :: (Integer -> Integer) -> Integer -> Integer -> Bool
-testFuncionInteger funcion x c = funcion x == c
-
-testFuncionParInteger :: (Integer -> (Integer,Integer)) -> Integer -> (Integer,Integer) -> Bool
-testFuncionParInteger funcion x c = funcion x == c
-
 -- Funcion auxiliar
 esUnCubo :: Integer -> Bool
 esUnCubo x = (round (fromIntegral x**(1/3)))^3 == x

@@ -1,5 +1,15 @@
 import Tp1
 
+-- Funciones de Testeo: toman una funcion la evaluan al segundo argumento y la comparan con el tercero. Si la prueba fue exitosa devuelven True.
+testFuncionBool :: (Integer -> Bool) -> Integer -> Bool -> Bool
+testFuncionBool funcion x c = funcion x == c
+
+testFuncionInteger :: (Integer -> Integer) -> Integer -> Integer -> Bool
+testFuncionInteger funcion x c = funcion x == c
+
+testFuncionParInteger :: (Integer -> (Integer,Integer)) -> Integer -> (Integer,Integer) -> Bool
+testFuncionParInteger funcion x c = funcion x == c
+
 main = do
     putStrLn "Programa para testear las funciones del TP1."
     putStrLn "--------1: Test esSumaDeDosCubos --------\n"
