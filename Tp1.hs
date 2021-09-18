@@ -20,8 +20,15 @@ esNSumaDeAHasta n a mayorCubo | esUnCubo b && b >= 1 = True
 mayorCuboAprox :: Integer -> Integer
 mayorCuboAprox n = (floor (fromIntegral n**(1/3)))
 
+-- Toma un entero y devuelve un par ordenado tal que a^3 + b^3 = n. Codigo de esNSumaDeAHasta reciclado.
 descomposicionCubos :: Integer -> (Integer,Integer)
-descomposicionCubos n = (0,0)
+descomposicionCubos n = descomposicionCubosAux n 1 (mayorCuboAprox n)
+
+descomposicionCubosAux :: Integer -> Integer -> Integer -> (Integer,Integer)
+descomposicionCubosAux n a mayorCubo | not (esSumaDeDosCubos n) = (0,0)
+                                     | esUnCubo b && b >= 1     = (a,(round (fromIntegral b**(1/3))))
+                                     | otherwise                = descomposicionCubosAux n (a+1) mayorCubo
+                                          where b = (n - a^3)
 
 cantidadDeFormas :: Integer -> Integer
 cantidadDeFormas n = 0
