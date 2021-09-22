@@ -5,9 +5,9 @@ module Tp1 where
 esUnCubo :: Integer -> Bool
 esUnCubo x = (round (fromIntegral x**(1/3)))^3 == x
 
--- Funcion que indica si un numero es suma de dos cubos. N es tal que a^3 + b^3 = N
+-- Funcion que indica si un numero es suma de dos cubos. N es tal que a^3 + b^3 = N,  con N perteneciente a los numeros Naturales.
 esSumaDeDosCubos :: Integer -> Bool
-esSumaDeDosCubos n = esNSumaDeAHasta n 1 (mayorCuboAprox n)
+esSumaDeDosCubos n = not (n < 1) && esNSumaDeAHasta n 1 (mayorCuboAprox n)
 
 -- Funcion auxiliar, Le resta el cubo de A a N hasta encontrar un cubo B.
 esNSumaDeAHasta :: Integer -> Integer -> Integer -> Bool
@@ -32,7 +32,7 @@ descomposicionCubosAux n a mayorCubo | esUnCubo b && b >= 1     = (a,(round (fro
 
 cantidadDeFormas :: Integer -> Integer
 cantidadDeFormas n | not (esSumaDeDosCubos n) = 0
-                   | otherwise                = (cantidadDeFormasAux n 1 (mayorCuboAprox n)) `div` 2 -- lo divido por 2 porque repite casos
+                   | otherwise                = (cantidadDeFormasAux n 1 (mayorCuboAprox n)) `div` 2 -- lo divido por 2 porque repite cada caso exactamente 2 veces.
 
 cantidadDeFormasAux :: Integer -> Integer -> Integer -> Integer
 cantidadDeFormasAux n a cota | a > cota = 0
