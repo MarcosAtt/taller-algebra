@@ -5,7 +5,10 @@ module Tp1 where
 esUnCubo :: Integer -> Bool
 esUnCubo x = round (fromIntegral x**(1/3))^3 == x
 
--- Funcion que indica si un numero es suma de dos cubos. N es tal que a^3 + b^3 = N,  con N perteneciente a los numeros Naturales.
+raizCubica :: Integer -> Integer
+raizCubica x = round (fromIntegral x**(1/3))
+
+-- 1 - Funcion que indica si un numero es suma de dos cubos. N es tal que a^3 + b^3 = N,  con N perteneciente a los numeros Naturales.
 esSumaDeDosCubos :: Integer -> Bool
 esSumaDeDosCubos n = n >= 1 && esNSumaDeAHasta n 1 (mayorCuboAprox n)
 
@@ -20,16 +23,16 @@ esNSumaDeAHasta n a mayorCubo | esUnCubo b && b >= 1 = True
 mayorCuboAprox :: Integer -> Integer
 mayorCuboAprox n = floor (fromIntegral n**(1/3))
 
--- Toma un entero y devuelve un par ordenado tal que a^3 + b^3 = n. Codigo de esNSumaDeAHasta reciclado.
+-- 2 Toma un entero y devuelve un par ordenado tal que a^3 + b^3 = n. Codigo de esNSumaDeAHasta reciclado.
 descomposicionCubos :: Integer -> (Integer,Integer)
 descomposicionCubos n | not (esSumaDeDosCubos n) = (0,0)
                       | otherwise = descomposicionCubosAux n 1 (mayorCuboAprox n)
 
 descomposicionCubosAux :: Integer -> Integer -> Integer -> (Integer,Integer)
-descomposicionCubosAux n a mayorCubo | esUnCubo b && b >= 1     = (a,round (fromIntegral b**(1/3)))
+descomposicionCubosAux n a mayorCubo | esUnCubo b && b >= 1     = (a, raizCubica b)
                                      | otherwise                = descomposicionCubosAux n (a+1) mayorCubo
                                           where b = n - a^3
-
+-- 3 Devuelve la cantidad de formas de escribir
 cantidadDeFormas :: Integer -> Integer
 cantidadDeFormas n | not (esSumaDeDosCubos n) = 0
                    | otherwise                = cantidadDeFormasAux n 1 (mayorCuboAprox n) `div` 2 -- lo divido por 2 porque repite cada caso exactamente 2 veces.
