@@ -1,5 +1,4 @@
 module Tp1 where
--- Funciones del TP1, archivo de marcos
 
 -- Funcion auxiliar
 esUnCubo :: Integer -> Bool
@@ -68,4 +67,4 @@ esMuyEspecialAux :: Integer -> Integer -> Integer -> Bool
 esMuyEspecialAux n k m | n == (k^3) * m = False
                        | n >  (k^3) * m = esMuyEspecialAux n (k+1) m 
                        | m >= n = True
-                       | otherwise = esMuyEspecialAux n 2 (especialDesde (m+1)) 
+                       | otherwise = esMuyEspecialAux n 2 (especialDesde (m+1))
