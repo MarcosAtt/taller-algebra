@@ -131,3 +131,11 @@ zipi :: [a] -> [b] -> [(a,b)]
 zipi [] b = []
 zipi a [] = []
 zipi a b = ((head a),(head b)):(zipi (tail a) (tail b))
+
+listaDivisores :: Int -> [Int]
+listaDivisores n = listaDivisoresAux n 1
+
+listaDivisoresAux :: Int -> Int -> [Int]
+listaDivisoresAux n k | (k > (n `div` 2)) = [n]
+                      | n `mod` k == 0     =  k:(listaDivisoresAux n (k+1))
+                      | otherwise          =     listaDivisoresAux n (k+1)
