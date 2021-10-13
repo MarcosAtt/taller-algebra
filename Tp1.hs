@@ -38,9 +38,10 @@ cantidadDeFormas n | not (esSumaDeDosCubos n) = 0
                    | otherwise                = cantidadDeFormasAux n 1 (mayorCuboAprox n) `div` 2 -- lo divido por 2 porque repite cada caso exactamente 2 veces.
 
 cantidadDeFormasAux :: Integer -> Integer -> Integer -> Integer
-cantidadDeFormasAux n a cota | a > cota             = 0
-                             | esUnCubo b && b >= 1 = 1 + cantidadDeFormasAux n (a+1) cota
-                             | otherwise            =     cantidadDeFormasAux n (a+1) cota
+cantidadDeFormasAux n a cota | a > cota                         = 0
+                             | esUnCubo b && b >= 1 && b == a^3 = 2 + cantidadDeFormasAux n (a+1) cota
+                             | esUnCubo b && b >= 1             = 1 + cantidadDeFormasAux n (a+1) cota
+                             | otherwise                        =     cantidadDeFormasAux n (a+1) cota
                                     where b = n - a^3
 
 -- 4 - Siguiente numero especial desde n. (especial: cantidad de formas >= 2)
