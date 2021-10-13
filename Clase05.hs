@@ -154,10 +154,10 @@ collatzMax n1 n2 | n1 == n2 = n1
                  | otherwise = collatzMax n1 (n2-1)
 -- Esta funcion no la pedian.
 minimoComunMultiplo :: Int -> Int -> Int
-minimoComunMultiplo a b = (a * b) `div` (maximoComunDivisor a b)
+minimoComunMultiplo a b = (a * b) `div` (mcd a b)
 
-maximoComunDivisor :: Int -> Int -> Int
-maximoComunDivisor a b | a > b = divideAmbos a b a
+mcd :: Int -> Int -> Int
+mcd a b | a > b = divideAmbos a b a
                        | b > a = divideAmbos a b b
                        | a == b = a
 
@@ -167,7 +167,7 @@ divideAmbos a b i | i < 0 = 1
                   | otherwise = divideAmbos a b (i-1)
 
 sonCoprimos :: Int -> Int -> Bool
-sonCoprimos a b = maximoComunDivisor a b == 1
+sonCoprimos a b = mcd a b == 1
 
 cantidadCoprimosMenores :: Int -> Int
 cantidadCoprimosMenores n = cantidadCoprimosMenoresDesde n 2
