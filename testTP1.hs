@@ -44,6 +44,8 @@ main = do
     putStrLn (show (testFuncionInteger cantidadDeFormas 4104 2))
     putStrLn (show (testFuncionInteger cantidadDeFormas 6963472309248 4))
     putStrLn (show (testFuncionInteger cantidadDeFormas 9 1))
+    putStrLn (show (testFuncionInteger cantidadDeFormas 28 1))
+    putStrLn (show (testFuncionInteger cantidadDeFormas 16 1))
 
     putStrLn "--------4: Test especialDesde --------\n"
     putStrLn (show (testFuncionInteger especialDesde 5 1729))
