@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Clase06 where
 -- Clase sobre listas
 sumatoria :: [Int] -> Int

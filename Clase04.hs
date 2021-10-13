@@ -1,3 +1,4 @@
+module Clase04 where
 import Clase03(factorial, esPar)
 
 sumatoria :: Int -> Int
@@ -70,11 +71,11 @@ g3 n | esPar n = 2^n + g3 (n-2)
 {-
 7
 Implementar una función que dado un n, sume todos los números naturales menores o
-iguales que n que tengan todos los dı́gitos iguales.-}
+iguales que n que tengan todos los dı́gitos iguales.
 sumaDigitosIguales :: Int -> Int
 sumaDigitosIguales | n == 0 = 0
                    | n < 10 = n + sumaDigitosIguales (n-1)
-
+-}
 -- 1 Cumple propiedad de gauss.
 
 sumasGauss :: Int -> Bool
