@@ -35,11 +35,11 @@ descomposicionCubosAux n a mayorCubo | esUnCubo b && b >= 1     = (a, raizCubica
 -- 3 Devuelve la cantidad de formas de escribir
 cantidadDeFormas :: Integer -> Integer
 cantidadDeFormas n | not (esSumaDeDosCubos n) = 0
-                   | otherwise                = cantidadDeFormasAux n 1 (mayorCuboAprox n) `div` 2 -- lo divido por 2 porque repite cada caso exactamente 2 veces.
+                   | otherwise                = cantidadDeFormasAux n 1 (mayorCuboAprox n)
 
 cantidadDeFormasAux :: Integer -> Integer -> Integer -> Integer
-cantidadDeFormasAux n a cota | a > cota                         = 0
-                             | esUnCubo b && b >= 1 && b == a^3 = 2 + cantidadDeFormasAux n (a+1) cota
+cantidadDeFormasAux n a cota | a > cota   || b <  a^3           = 0
+                             | esUnCubo b && b == a^3           = 1
                              | esUnCubo b && b >= 1             = 1 + cantidadDeFormasAux n (a+1) cota
                              | otherwise                        =     cantidadDeFormasAux n (a+1) cota
                                     where b = n - a^3
