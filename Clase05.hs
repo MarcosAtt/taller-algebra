@@ -153,8 +153,8 @@ collatzMax n1 n2 | n1 == n2 = n1
                  | largoSecuencia n1 < largoSecuencia n2 = collatzMax (n1+1) n2
                  | otherwise = collatzMax n1 (n2-1)
 -- Esta funcion no la pedian.
-minimoComunMultiplo :: Int -> Int -> Int
-minimoComunMultiplo a b = (a * b) `div` (mcd a b)
+mcm :: Int -> Int -> Int
+mcm a b = (a * b) `div` (mcd a b)
 
 mcd :: Int -> Int -> Int
 mcd a b | a > b = divideAmbos a b a

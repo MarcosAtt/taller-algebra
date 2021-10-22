@@ -17,10 +17,7 @@ incluido (x:xs) c = pertenece x c && incluido xs c
 iguales :: Set Int -> Set Int -> Bool
 iguales c1 c2 = incluido c1 c2 && incluido c2 c1
 
-union :: Set Int -> Set Int -> Set Int
-union [] y = y
-union (x:xs) c2 | not (pertenece x c2) = x:(union xs c2)
-                | otherwise = union xs c2
+ 
 
 intereseccion :: Set Int -> Set Int -> Set Int
 intereseccion [] _ = []
