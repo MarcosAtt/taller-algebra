@@ -1,5 +1,6 @@
 module Clase05 where
 import Clase03(factorial, fib, esPar)
+import Clase09(mcd)
 {- Clase 05: Recursion con funciones auxiliares. -}
 
 prod :: Int -> Int -> Int
@@ -155,11 +156,6 @@ collatzMax n1 n2 | n1 == n2 = n1
 -- Esta funcion no la pedian.
 mcm :: Int -> Int -> Int
 mcm a b = (a * b) `div` (mcd a b)
-
-mcd :: Int -> Int -> Int
-mcd a b | a > b = divideAmbos a b a
-                       | b > a = divideAmbos a b b
-                       | a == b = a
 
 divideAmbos :: Int -> Int -> Int -> Int
 divideAmbos a b i | i < 0 = 1
