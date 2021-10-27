@@ -5,3 +5,12 @@ Tp1.hi
 Tp1.o
 etc/
 Extra.hs
+Aritmetica.hi
+Aritmetica.o
+RSA.hi
+RSA.o
+Tipos.hi
+Tipos.o
+main
+main.hi
+main.o
