@@ -30,8 +30,8 @@ diferencia a [] = a
 diferencia (x:xs) c2 | not (pertenece x c2) = x:(diferencia xs c2)
                      | otherwise            =    diferencia xs c2
 
-diferenciaSimetrica :: Set Int -> Set Int -> Set Int
-diferenciaSimetrica c1 c2 = union (diferencia c1 c2) (diferencia c2 c1)
+--diferenciaSimetrica :: Set Int -> Set Int -> Set Int
+--diferenciaSimetrica c1 c2 = unionC (diferencia c1 c2) (diferencia c2 c1)
 
 agregarC :: Set Int -> Set (Set Int) -> Set (Set Int)
 agregarC xs xss | perteneceC xs xss = xss
