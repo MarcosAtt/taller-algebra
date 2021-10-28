@@ -3,7 +3,6 @@ import Tipos
 import Data.Tuple
 import Data.Bits
 
---(2)
 siguienteNumeroMayorN :: Set Integer -> Integer -> Integer
 siguienteNumeroMayorN [] n = n
 siguienteNumeroMayorN (x:xs) n | x > n = x
@@ -18,30 +17,10 @@ cribaAux :: Set Integer -> Integer -> Set Integer
 cribaAux l n | proximoPrimo == n = l
              | otherwise = cribaAux (eliminarMultiplosLista l proximoPrimo) proximoPrimo 
              where proximoPrimo = siguienteNumeroMayorN l n
-
+-- Ejercicio 1: Lista de todos los primos hasta n.
 criba :: Integer -> Set Integer
 criba n = cribaAux [2..n] 1
 
----------------- ESTO NO ES PARTE DEL TP SOLO TESTEO----------------------
-{-
-menorDivisor :: Integer -> Integer
-menorDivisor n = menorDivisorDesde n 2
-
-menorDivisorDesde :: Integer -> Integer -> Integer
-menorDivisorDesde n k | n == k = n
-                      | n `mod` k == 0 = k
-                      | otherwise = menorDivisorDesde n (k+1)
-
-esPrimo :: Integer -> Bool
-esPrimo 1 = False
-esPrimo n = n == menorDivisor n
-sonTODOSPRIMOS :: Set Integer -> Bool
-sonTODOSPRIMOS [] = True
-sonTODOSPRIMOS (x:xs) | not (esPrimo x) = False
-                      | otherwise = sonTODOSPRIMOS xs
--}
------------------------------------------------------------------------
---(3)
 mcd :: Integer -> Integer -> Integer
 mcd a 0 = abs a
 mcd 0 b = abs b
@@ -49,21 +28,25 @@ mcd a b | (a == 1) || (b == 1) = 1
         | abs a > abs b = mcd (a `mod` b) b
         | abs b > abs a = mcd (b `mod` a) a
 
-coprimoCon:: Integer -> Integer
-coprimoCon n = coprimoConAux n 2
+sonCoprimos :: Integer -> Integer -> Bool
+sonCoprimos a b = mcd a b == 1
 
 coprimoConAux :: Integer -> Integer -> Integer
 coprimoConAux n i | sonCoprimos n i = i
                   | otherwise = coprimoConAux n (i+1)
-
-sonCoprimos :: Integer -> Integer -> Bool
-sonCoprimos a b = mcd a b == 1
+-- Ejercicio 2: Encuentra un numero coprimo k con n (n:k) = 1
+coprimoCon:: Integer -> Integer
+coprimoCon n = coprimoConAux n 2
 
 emcd :: Integer -> Integer -> (Integer, Integer, Integer)
 emcd 0 b = (b, 0, 1)
-emcd a b = (g, t - (b `div` a) * s, s)
-        where (g, s, t) = emcd (b `mod` a) a
---(4) Sacar el inverso multiplicativo es como resolver la ecuacion de congruencia n =(cong)= 1 (mod m) y con el emcd tengo una solucion de lo puede valer s tal que s*n - t*m = 1 ya que n y m son coprimos. Entonces s (m) = inversoMult
+emcd a b = (d, t - (b `div` a) * s, s)
+        where (d, s, t) = emcd (b `mod` a) a
+
+-- Ejercicio 3: Inverso multiplicativo n m = i / n*i (mod m) = 1 .
+{- Sacar el inverso multiplicativo es como resolver la ecuacion de congruencia n =(cong)= 1 (mod m)
+ y con el emcd tengo una solucion de lo puede valer s tal que s*n - t*m = 1 ya que n y m son coprimos. 
+ Entonces s (m) = inversoMult -}
 inversoMultiplicativo:: Integer -> Integer -> Integer
 inversoMultiplicativo n m | sonCoprimos n m = s `mod` m
                           | otherwise = 0
