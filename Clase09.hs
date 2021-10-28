@@ -54,11 +54,11 @@ mcm :: Int -> Int -> Int
 mcm a b = (abs (a*b)) `div` (mcd a b)
 
 -- emcd a b = ((a:b), s, t)
-emcd :: Int -> Int -> (Int,Int,Int)
-emcd a 0 = (abs a,1,0)
-emcd a b = (d,t,s-t*k)
-           where (k,r)   = (((max a b) `div` (min a b)), ((max a b) `mod` (min a b)))
-                 (d,s,t) = emcd b r
+emcd :: Int -> Int -> (Int, Int, Int)
+emcd 0 b = (b, 0, 1)
+emcd a b = (g, t - (b `div` a) * s, s)
+        where (g, s, t) = emcd (b `mod` a) a
+
 
 -- A reimplementar
 solEcLineal :: (Int,Int,Int) -> (Int,Int)
