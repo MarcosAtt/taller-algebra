@@ -69,10 +69,11 @@ sonCoprimos a b = mcd a b == 1
 
 --(4)
 inversoMultiplicativo:: Integer -> Integer -> Integer
-inversoMultiplicativo n base = inversoMultiplicativoAux n 1 base
+inversoMultiplicativo n m | sonCoprimos n m = inversoMultiplicativoAux n 1 m
+                          | otherwise = 0
 
-inversoMultiplicativoAux n k base | ((n*k) `mod` base) /= 1    = inversoMultiplicativoAux n (k+1) base
-                                  | otherwise                  = k
+inversoMultiplicativoAux n k m | ((n*k) `mod` m) /= 1  = inversoMultiplicativoAux n (k+1) m
+                               | otherwise          = k
 
 -- Función de regalo para exponenciar "rápido"
 modExp :: Integer -> Integer -> Integer -> Integer
