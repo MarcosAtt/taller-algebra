@@ -49,12 +49,6 @@ mcd a b | (a == 1) || (b == 1) = 1
         | abs a > abs b = mcd (a `mod` b) b
         | abs b > abs a = mcd (b `mod` a) a
 
---(1)
-emcd :: Integer -> Integer -> (Integer, Integer, Integer)
-emcd 0 b = (b, 0, 1)
-emcd a b = (g, t - (b `div` a) * s, s)
-        where (g, s, t) = emcd (b `mod` a) a
-
 coprimoCon:: Integer -> Integer
 coprimoCon n = coprimoConAux n 2
 
@@ -65,7 +59,10 @@ coprimoConAux n i | sonCoprimos n i = i
 sonCoprimos :: Integer -> Integer -> Bool
 sonCoprimos a b = mcd a b == 1
 
-
+emcd :: Integer -> Integer -> (Integer, Integer, Integer)
+emcd 0 b = (b, 0, 1)
+emcd a b = (g, t - (b `div` a) * s, s)
+        where (g, s, t) = emcd (b `mod` a) a
 --(4) Sacar el inverso multiplicativo es como resolver la ecuacion de congruencia n =(cong)= 1 (mod m) y con el emcd tengo una solucion de lo puede valer s tal que s*n - t*m = 1 ya que n y m son coprimos. Entonces s (m) = inversoMult
 inversoMultiplicativo:: Integer -> Integer -> Integer
 inversoMultiplicativo n m | sonCoprimos n m = s `mod` m
