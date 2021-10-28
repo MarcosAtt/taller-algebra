@@ -11,12 +11,13 @@ siguienteNumeroMayorN (x:xs) n | x > n = x
 eliminarMultiplosLista :: Set Integer -> Integer -> Set Integer
 eliminarMultiplosLista [] _ = []
 eliminarMultiplosLista (x:xs) n | (x `mod` n == 0) && (x > n) = eliminarMultiplosLista xs n
-                                | otherwise = x:(eliminarMultiplosLista xs n)
+                                | otherwise     = x:(eliminarMultiplosLista xs n)
 
 cribaAux :: Set Integer -> Integer -> Set Integer
 cribaAux l n | proximoPrimo == n = l
              | otherwise = cribaAux (eliminarMultiplosLista l proximoPrimo) proximoPrimo 
-             where proximoPrimo = siguienteNumeroMayorN l n
+        where proximoPrimo = siguienteNumeroMayorN l n
+
 -- Ejercicio 1: Lista de todos los primos hasta n.
 criba :: Integer -> Set Integer
 criba n = cribaAux [2..n] 1
@@ -34,6 +35,7 @@ sonCoprimos a b = mcd a b == 1
 coprimoConAux :: Integer -> Integer -> Integer
 coprimoConAux n i | sonCoprimos n i = i
                   | otherwise = coprimoConAux n (i+1)
+
 -- Ejercicio 2: Encuentra un numero coprimo k con n (n:k) = 1
 coprimoCon:: Integer -> Integer
 coprimoCon n = coprimoConAux n 2
@@ -43,7 +45,7 @@ emcd 0 b = (b, 0, 1)
 emcd a b = (d, t - (b `div` a) * s, s)
         where (d, s, t) = emcd (b `mod` a) a
 
--- Ejercicio 3: Inverso multiplicativo n m = i / n*i (mod m) = 1 .
+-- Ejercicio 3: Inverso multiplicativo n m = i / n*i (mod m) = 1
 {- Sacar el inverso multiplicativo es como resolver la ecuacion de congruencia n =(cong)= 1 (mod m)
  y con el emcd tengo una solucion de lo puede valer s tal que s*n - t*m = 1 ya que n y m son coprimos. 
  Entonces s (m) = inversoMult -}
