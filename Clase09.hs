@@ -47,8 +47,8 @@ mcd :: Int -> Int -> Int
 mcd a 0 = abs a
 mcd 0 b = abs b
 mcd a b | (a == 1) || (b == 1) = 1
-        | abs a > abs b = mcd (a `mod` b) b
-        | abs b > abs a = mcd (b `mod` a) a
+        | abs a >= abs b = mcd (a `mod` b) b
+        | otherwise = mcd (b `mod` a) a
 
 mcm :: Int -> Int -> Int
 mcm a b = (abs (a*b)) `div` (mcd a b)
