@@ -17,7 +17,7 @@ codificador clave m = codificadorAux clave (aEnteros m)
 
 codificadorAux :: Clpub -> Cifrado -> Cifrado
 codificadorAux clave [] = []
-codificadorAux (e, n) (a:as) = (modExp a e n):(codificadorAux (e,n) as)
+codificadorAux (d, n) (a:as) = (modExp a d n):(codificadorAux (d,n) as)
 
 --(7)
 decodificador :: Clpri -> Cifrado -> Mensaje
@@ -25,4 +25,4 @@ decodificador clave m = aChars (decodificadorAux clave m)
 
 decodificadorAux :: Clpub -> Cifrado -> Cifrado
 decodificadorAux clave [] = []
-decodificadorAux (d, n) (a:as) = (modExp a d n):(decodificadorAux (d,n) as)
+decodificadorAux (e, n) (a:as) = (modExp a e n):(decodificadorAux (e,n) as)
