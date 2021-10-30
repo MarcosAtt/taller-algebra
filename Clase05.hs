@@ -162,15 +162,15 @@ divideAmbos a b i | i < 0 = 1
                   | (esDivisor i a) && (esDivisor i b) = i
                   | otherwise = divideAmbos a b (i-1)
 
-sonCoprimos :: Int -> Int -> Bool
-sonCoprimos a b = mcd a b == 1
+sonCoprimos'' :: Int -> Int -> Bool
+sonCoprimos'' a b = mcd a b == 1
 
 cantidadCoprimosMenores :: Int -> Int
 cantidadCoprimosMenores n = cantidadCoprimosMenoresDesde n 2
 
 cantidadCoprimosMenoresDesde :: Int -> Int -> Int
 cantidadCoprimosMenoresDesde n k | n == k = 0
-                                 | sonCoprimos n k = 1 + cantidadCoprimosMenoresDesde n (k+1)
+                                 | sonCoprimos'' n k = 1 + cantidadCoprimosMenoresDesde n (k+1)
                                  | otherwise = cantidadCoprimosMenoresDesde n (k+1)
 
 satisfaceGoldbach :: Int -> Bool
@@ -205,8 +205,8 @@ existeDivisorComunHasta :: Int -> Int -> Int -> Bool
 existeDivisorComunHasta _ _ 1 = False
 existeDivisorComunHasta a b hasta = (esDivisor hasta a) && (esDivisor hasta b) || existeDivisorComunHasta a b (hasta-1)
 
-sonCoprimos' :: Int -> Int -> Bool
-sonCoprimos' a b = not (existeDivisorComunHasta a b (min a b))
+sonCoprimos''' :: Int -> Int -> Bool
+sonCoprimos''' a b = not (existeDivisorComunHasta a b (min a b))
 
 -- Refactorizacion de lo mio con booleanos como hizo tobi. La idea era exactamente la misma pero usaba un entero sin necesidad.
 
@@ -214,7 +214,7 @@ divideAmbos2 :: Int -> Int -> Int -> Bool
 divideAmbos2 _ _ 1 = False
 divideAmbos2 a b i = (esDivisor i a) && (esDivisor i b) || divideAmbos2 a b (i-1)
 
-sonCoprimos2 :: Int -> Int -> Bool
-sonCoprimos2 a b = not (divideAmbos2 a b (min a b))
+sonCoprimos''2 :: Int -> Int -> Bool
+sonCoprimos''2 a b = not (divideAmbos2 a b (min a b))
 
---sonCoprimosHasta' :: Int -> Int -> Int -> Bool
+--sonCoprimos''Hasta' :: Int -> Int -> Int -> Bool

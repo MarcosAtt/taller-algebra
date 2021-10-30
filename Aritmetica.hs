@@ -13,14 +13,14 @@ eliminarMultiplosLista [] _ = []
 eliminarMultiplosLista (x:xs) n | (x `mod` n == 0) && (x > n) = eliminarMultiplosLista xs n
                                 | otherwise     = x:(eliminarMultiplosLista xs n)
 
-cribaAux :: Set Integer -> Integer -> Set Integer
-cribaAux l n | proximoPrimo == n = l
-             | otherwise = cribaAux (eliminarMultiplosLista l proximoPrimo) proximoPrimo 
+eliminarCompuestos :: Set Integer -> Integer -> Set Integer
+eliminarCompuestos l n | proximoPrimo == n = l
+                       | otherwise = eliminarCompuestos (eliminarMultiplosLista l proximoPrimo) proximoPrimo 
         where proximoPrimo = siguienteNumeroMayorN l n
 
 -- Ejercicio 1: Lista de todos los primos hasta n.
 criba :: Integer -> Set Integer
-criba n = cribaAux [2..n] 1
+criba n = eliminarCompuestos [2..n] 1
 
 mcd :: Integer -> Integer -> Integer
 mcd a 0 = abs a
