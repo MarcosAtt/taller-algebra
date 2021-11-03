@@ -2,27 +2,26 @@ module RSA where
 import Tipos
 import Aritmetica
 
-
---(3)
+-- Ejercicio 4: Dados dos primos p q, genera claves posibles.
 claves :: Integer -> Integer -> (Integer, Integer, Integer)
 claves p q = (e, d, n)
   where n = p*q
-        e = coprimoCon cota -- 1<e<cota, e coprimo cota
-        d = inversoMultiplicativo e cota -- d inverso multiplicativo e (cota)
-        cota = (p-1)*(q-1)
+        e = coprimoCon m -- 1<e<m, e coprimo m
+        d = inversoMultiplicativo e m
+        m = (p-1)*(q-1)
 
---(6)
+-- Ejercicio 5: Dada una clave publica (e, n) y un mensaje (lista de Chars) devuelve el mensaje encriptado (lista de Integers).
 codificador :: Clpub -> Mensaje -> Cifrado
-codificador clave m = codificadorAux clave (aEnteros m)
+codificador clavePublica mensaje = codificarLetras clavePublica (aEnteros mensaje)
 
-codificadorAux :: Clpub -> Cifrado -> Cifrado
-codificadorAux clave [] = []
-codificadorAux (d, n) (a:as) = (modExp a d n):(codificadorAux (d,n) as)
+codificarLetras :: Clpub -> Cifrado -> Cifrado
+codificarLetras clavePublica [] = []
+codificarLetras (e, n) (a:as) = (modExp a e n):(codificarLetras (e,n) as)
 
---(7)
+-- Ejercicio 6: Dada una clave privada (d, n) y un mensaje encriptado (lista de Integers), devuelve el mensaje original.
 decodificador :: Clpri -> Cifrado -> Mensaje
-decodificador clave m = aChars (decodificadorAux clave m)
+decodificador clavePrivada mensajeCifrado = aChars (decodificarLetras clavePrivada mensajeCifrado)
 
-decodificadorAux :: Clpub -> Cifrado -> Cifrado
-decodificadorAux clave [] = []
-decodificadorAux (e, n) (a:as) = (modExp a e n):(decodificadorAux (e,n) as)
+decodificarLetras :: Clpri -> Cifrado -> Cifrado
+decodificarLetras clavePrivada [] = []
+decodificarLetras (d, n) (a:as) = (modExp a d n):(decodificarLetras (d,n) as)
