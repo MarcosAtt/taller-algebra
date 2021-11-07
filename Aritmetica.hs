@@ -11,7 +11,7 @@ siguienteNumeroMayorN (x:xs) n | x > n = x
 eliminarMultiplos :: Set Integer -> Integer -> Set Integer
 eliminarMultiplos [] _ = []
 eliminarMultiplos (x:xs) n | (x `mod` n == 0) && (x > n) = eliminarMultiplos xs n
-                                | otherwise     = x:(eliminarMultiplos xs n)
+                           | otherwise                   = x:(eliminarMultiplos xs n)
 
 eliminarCompuestos :: Set Integer -> Integer -> Set Integer
 eliminarCompuestos l n | proximoPrimo == n = l
