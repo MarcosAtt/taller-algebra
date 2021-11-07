@@ -14,9 +14,9 @@ eliminarMultiplos (x:xs) n | (x `mod` n == 0) && (x > n) = eliminarMultiplos xs 
                            | otherwise                   = x:(eliminarMultiplos xs n)
 
 eliminarCompuestos :: Set Integer -> Integer -> Set Integer
-eliminarCompuestos l n | proximoPrimo == n = l
-                       | otherwise = eliminarCompuestos (eliminarMultiplos l proximoPrimo) proximoPrimo 
-        where proximoPrimo = siguienteNumeroMayorN l n
+eliminarCompuestos lista n | proximoPrimo == n = lista
+                           | otherwise = eliminarCompuestos (eliminarMultiplos lista proximoPrimo) proximoPrimo 
+        where proximoPrimo = siguienteNumeroMayorN lista n
 
 -- Ejercicio 1: Lista de todos los primos hasta n.
 criba :: Integer -> Set Integer
@@ -34,7 +34,7 @@ coprimoConAux n k | sonCoprimos n k = k
 coprimoCon :: Integer -> Integer
 coprimoCon n = coprimoConAux n 2
 
--- Algoritmo extendido de Euclides. Devuelve (mcd, s, t)
+-- Algoritmo extendido de Euclides. Devuelve (mcd, s, t), maximo comun divisor y una solucion de a*s + b*t = mcd
 emcd :: Integer -> Integer -> (Integer, Integer, Integer)
 emcd 0 b = (b, 0, 1)
 emcd a b = (d, t - (b `div` a) * s, s)
