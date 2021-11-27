@@ -7,5 +7,7 @@ import Clase07
 import Clase08
 import Clase09
 import Clase10
+import Clase11
+import Clase12
 import Extra
 {-Funciones de algebra-}
