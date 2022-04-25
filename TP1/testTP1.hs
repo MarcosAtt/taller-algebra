@@ -1,13 +1,8 @@
 import Tp1
 {-
-    Testea las funciones del archivo Tp1.hs (se le puede cambiar el nombre) 
-    * Tp1.hs tiene que estar en la misma carpeta que este archivo para compilarlo bien.
-    * Las funciones que no esten completas hay que definirlas con un valor predeterminado. Ej. cantidadDeFormas n = 0
-    Este archivo se compila con este comando en la consola: ghc testTP1.hs
-                                      y se ejecuta (Linux): ./testTP1
+    Testea las funciones del archivo Tp1.hs
 -}
 
--- Funciones de Testeo: toman una funcion la evaluan al segundo argumento y la comparan con el tercero. Si la prueba fue exitosa devuelven True.
 testFuncionBool :: (Integer -> Bool) -> Integer -> Bool -> Bool
 testFuncionBool funcion x c = funcion x == c
 
